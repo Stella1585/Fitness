@@ -58,8 +58,10 @@ export const config = {
           const data = await res.json();
           if (res.ok && data.jwt) {
             let user_start = await getUserById(data.jwt);
+            // console.log(user_start);
 
-            let user = { ...user_start, jwt_extern: data.jwt, role: user_start?.accountType };
+
+            let user = { ...user_start, jwt_external: data.jwt, role: user_start?.accountType, id: user_start.userId };
 
             return user;
           }
@@ -76,7 +78,7 @@ export const config = {
   callbacks: {
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl
-      if (pathname === "/middleware-example") return !!auth
+      // if (pathname === "/middleware-example") return !!auth
 
       // //* role specific middleware
 
@@ -90,20 +92,25 @@ export const config = {
     jwt({ token, user }) {
       if (user) {
         //@ts-ignore
-        token.role = user.role
+        token.id = user.id
         //@ts-ignore
-        token.jwt_extern = user.jwt_extern
+        token.role = user.role
+        // token.user_id = user.id
+        //@ts-ignore
+        token.jwt_external = user.jwt_external
       }
       return token;
     },
 
     session({ session, token, user }) {
       //@ts-ignore
+      session.user.id = token.id;
+      //@ts-ignore
       session.user.role = token.role;
       //@ts-ignore
-      session.user.jwt_extern = token.jwt_extern;
-      return session;
-      // return Promise.resolve(session)
+      session.user.jwt_external = token.jwt_external;
+      // return session;
+      return Promise.resolve(session)
     }
   },
 } satisfies NextAuthConfig
