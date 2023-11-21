@@ -28,3 +28,10 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# yarn 
+yarn.lock
+yarn-error.txt
+
+#npm
+package-lock.json
