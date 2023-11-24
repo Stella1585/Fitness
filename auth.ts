@@ -82,7 +82,9 @@ export const config = {
 
       // //* role specific middleware
 
-      // if (pathname === "/client") return !!auth
+      if (pathname === "/protected/manager") return !!auth
+      if (pathname === "/protected/client") return !!auth
+      if (pathname === "/protected/trainer") return !!auth
 
       return true
     },

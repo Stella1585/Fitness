@@ -3,7 +3,7 @@ import { auth } from "auth"
 export const GET = auth(async (req) => {
     if (req.auth) {
         //TODO: console.log() should be deleted in production
-        console.log("user data", req.auth.user);
+        // console.log("user data", req.auth.user);
         let url = "https://afefitness2023.azurewebsites.net/api/WorkoutPrograms";
 
 

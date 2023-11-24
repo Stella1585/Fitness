@@ -6,7 +6,7 @@ export default async function ClientPage() {
   const session = await auth()
 
   //TODO: console.log() should be deleted in production
-  console.log(session);
+  // console.log(session);
   
   
   // TODO: Look into https://react.dev/reference/react/experimental_taintObjectReference

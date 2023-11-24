@@ -3,7 +3,7 @@ import { auth } from "auth"
 export const GET = auth(async (req) => {
   if (req.auth) {
     //TODO: console.log() should be deleted in production
-    console.log("user data", req.auth.user);
+    // console.log("user data", req.auth.user);
     let workout_id = null;  //TODO: should be retrieved by the route maybe with dynamic routes
     let url = `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/${workout_id}`;
 
