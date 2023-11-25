@@ -76,21 +76,58 @@ export const config = {
   ],
 
   callbacks: {
-    authorized({ request, auth }) {
-      const { pathname } = request.nextUrl
-      // if (pathname === "/middleware-example") return !!auth
+    authorized({ request: { nextUrl }, auth }) {
+      const { pathname } = nextUrl
+
+      const isLoggedIn = !!auth?.user
+      const paths = ["/protected/manager", "/protected/client", "/protected/trainer"]
+      const isProtected = paths.some((path) => nextUrl.pathname.startsWith(path))
+
+      if (isProtected && !isLoggedIn) {
+        const redirectUrl = new URL("api/auth/signin", nextUrl.origin)
+        redirectUrl.searchParams.append("callbackUrl", nextUrl.href)
+        return Response.redirect(redirectUrl)
+      }
 
       // //* role specific middleware
+      if (isLoggedIn) {
+        if (pathname.startsWith("/protected/manager/") && auth?.user?.role != "Manager") {
+          const redirectUrl = new URL("/", nextUrl.origin)
+          return Response.redirect(redirectUrl)
 
-      if (pathname === "/protected/manager") return !!auth
-      if (pathname === "/protected/client") return !!auth
-      if (pathname === "/protected/trainer") return !!auth
+
+        }
+        if (pathname.startsWith("/protected/trainer") && auth?.user?.role != "PersonalTrainer") {
+          const redirectUrl = new URL("/", nextUrl.origin)
+          return Response.redirect(redirectUrl)
+
+        }
+        if (pathname.startsWith("/protected/client/") && auth?.user?.role != "Client") {
+          const redirectUrl = new URL("/", nextUrl.origin)
+          return Response.redirect(redirectUrl)
+
+        }
+      }
+
+      // if (pathname === "/protected/manager") return !!auth
+      // if (pathname === "/protected/client") return !!auth
+      // if (pathname === "/protected/trainer") return !!auth
 
       return true
     },
     async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      // if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      // else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     },
+
+    // async redirect({ url, baseUrl }) {
+    //   console.log(baseUrl);
+
+    //   return baseUrl
+    // },
     jwt({ token, user }) {
       if (user) {
         //@ts-ignore

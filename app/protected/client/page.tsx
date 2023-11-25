@@ -1,11 +1,15 @@
 import { auth } from "auth";
+import ClientTabs from "@/components/view/client-tabs";
+import { redirect } from "next/navigation";
 
 export default async function ClientPage() {
-  const session = await auth();
+  // const session = await auth();
 
-  if (session && session?.user?.role === "Models.Enums.Role.Client") {
-    return <p>You are an Client, welcome!</p>;
-  }
+  //@ts-ignore
+  // if (session?.user?.role != "Client") redirect("/");
+  //@ts-ignore
+  // if (session?.user?.role != "Client")
+  //   return <p>You are not authorized to view this page!</p>;
 
-  return <p>You are not authorized to view this page!</p>;
+  return <ClientTabs />;
 }
