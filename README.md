@@ -25,14 +25,6 @@ This is a starter template for [Learn Next.js](https://nextjs.org/learn).
     Password = "aZ"
 
 ## Clients
-    
-    Email = "c1@fit",
-    FirstName = "John",
-    LastName = "Doe",
-    AccountType = Models.Enums.Role.Client,
-    Password = "aA",
-    PersonalTrainerId = 2
-
     Email = "c2@fit",
     FirstName = "Jane",
     LastName = "Doe",
