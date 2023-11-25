@@ -1,8 +1,30 @@
 This is a starter template for [Learn Next.js](https://nextjs.org/learn).
 
-# Test User Credentials
+## Basic functionality:
+- [x] The user can login
 
-## Manager
+### The manager
+- [ ] Can create users (personal trainers)
+### A personal trainer
+- [ ] Can create users (clients)
+- [ ] Create a new workout program for a client
+- [ ] Can add new exercises to a workout program
+- [ ] An exercise has a name, a description, number of sets and number of repetitions or the time it should last.
+- [x] See a list of workout programs.
+- [x]  See a specific workout program.
+- [x] See a list of clients.
+
+### A client
+- [ ] Can see his/her workout program.
+- [ ] If the user has more than one program then the app will show a list of programs, and the user can then select the program to be displayed.
+
+
+
+
+
+## Test User Credentials
+
+### Manager
     
     Email = "boss@fitness.moon",
     FirstName = "Manager",
@@ -10,7 +32,7 @@ This is a starter template for [Learn Next.js](https://nextjs.org/learn).
     AccountType = Manager,
     Password = "asdfQWER",
 
-## Personal trainers
+### Personal trainers
     
     Email = "m@fit",
     FirstName = "Superman",
@@ -24,7 +46,7 @@ This is a starter template for [Learn Next.js](https://nextjs.org/learn).
     AccountType = PersonalTrainer,
     Password = "aZ"
 
-## Clients
+### Clients
     Email = "c2@fit",
     FirstName = "Jane",
     LastName = "Doe",
