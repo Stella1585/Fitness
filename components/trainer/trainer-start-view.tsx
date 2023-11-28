@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import TrainerTabs from "@/components/view/trainer-tabs";
+import TrainerTabs from "@/components/trainer/trainer-tabs";
 
 export default function TrainerStartView() {
   const [clients, setClients]: any = useState();

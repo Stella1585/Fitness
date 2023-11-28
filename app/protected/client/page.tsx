@@ -1,5 +1,5 @@
 import { auth } from "auth";
-import ClientTabs from "@/components/view/client-tabs";
+import ClientTabs from "@/components/trainer/client-tabs";
 import { redirect } from "next/navigation";
 
 export default async function ClientPage() {

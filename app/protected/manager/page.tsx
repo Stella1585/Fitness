@@ -1,5 +1,5 @@
 import { auth } from "auth";
-import ManagerTabs from "@/components/view/manager-tabs";
+import ManagerTabs from "@/components/manager/manager-tabs";
 
 export default async function ManagerPage() {
   const session = await auth();

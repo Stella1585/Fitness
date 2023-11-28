@@ -14,7 +14,7 @@ export default function TrainerWorkoutsView({ workouts }: { workouts: any }) {
           <Table.HeadCell>Name</Table.HeadCell>
           <Table.HeadCell>Description</Table.HeadCell>
           <Table.HeadCell>Client_Name</Table.HeadCell>
-          <Table.HeadCell>Reps/time</Table.HeadCell>
+          <Table.HeadCell></Table.HeadCell>
           <Table.HeadCell>
             <span className="sr-only">Edit</span>
           </Table.HeadCell>

@@ -91,18 +91,21 @@ export const config = {
 
       // //* role specific middleware
       if (isLoggedIn) {
-        if (pathname.startsWith("/protected/manager/") && auth?.user?.role != "Manager") {
+        //@ts-ignore
+        if (pathname.startsWith("/protected/manager") && auth?.user?.role != "Manager") {
           const redirectUrl = new URL("/", nextUrl.origin)
           return Response.redirect(redirectUrl)
 
 
         }
+        //@ts-ignore
         if (pathname.startsWith("/protected/trainer") && auth?.user?.role != "PersonalTrainer") {
           const redirectUrl = new URL("/", nextUrl.origin)
           return Response.redirect(redirectUrl)
 
         }
-        if (pathname.startsWith("/protected/client/") && auth?.user?.role != "Client") {
+        //@ts-ignore
+        if (pathname.startsWith("/protected/client") && auth?.user?.role != "Client") {
           const redirectUrl = new URL("/", nextUrl.origin)
           return Response.redirect(redirectUrl)
 
