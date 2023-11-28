@@ -4,9 +4,9 @@ This is a starter template for [Learn Next.js](https://nextjs.org/learn).
 - [x] The user can login
 
 ### The manager
-- [ ] Can create users (personal trainers)
+- [x] Can create users (personal trainers)
 ### A personal trainer
-- [ ] Can create users (clients)
+- [x] Can create users (clients)
 - [ ] Create a new workout program for a client
 - [ ] Can add new exercises to a workout program
 - [ ] An exercise has a name, a description, number of sets and number of repetitions or the time it should last.
