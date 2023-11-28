@@ -4,7 +4,7 @@ import { Table } from "flowbite-react";
 import { useEffect, useState } from "react";
 
 export default function SpecificWorkout({ params }: any) {
-  const [workoutData, setWorkoutData] = useState([]);
+  const [workoutData, setWorkoutData]:any = useState([]);
   // const session = await auth();
   // console.log("ses: ", session);
 

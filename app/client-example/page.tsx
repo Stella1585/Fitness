@@ -12,6 +12,7 @@ export default async function ClientPage() {
   // TODO: Look into https://react.dev/reference/react/experimental_taintObjectReference
   // filter out sensitive data before passing to client.
   if (session?.user) {
+    //@ts-ignore
     session.user = {
       name: session.user.name,
       email: session.user.email,

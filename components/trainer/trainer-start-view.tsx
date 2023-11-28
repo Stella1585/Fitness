@@ -22,9 +22,7 @@ export default function TrainerStartView() {
     })();
   }, []);
 
-  if (!workouts) return <div>Loading ...</div>;
-
-  if (!clients) return <div>Loading ...</div>;
+  if (!workouts || !clients) return <div>Loading ...</div>;
 
   return (
     <div>

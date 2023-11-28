@@ -8,6 +8,7 @@ export const GET = auth(async (req) => {
         // console.log("user data", req.auth.user);
         let url = "https://afefitness2023.azurewebsites.net/api/Users/Clients";
 
+        //@ts-ignore
         let jwt_token = req?.auth?.user?.jwt_external;
 
         if (!jwt_token || jwt_token === undefined) {
@@ -38,5 +39,5 @@ export const GET = auth(async (req) => {
     }
 
     return Response.json({ message: "Not authenticated" }, { status: 401 })
-})
+}) as any;
 

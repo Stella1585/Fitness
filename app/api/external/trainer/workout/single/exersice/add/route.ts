@@ -12,12 +12,6 @@ interface IExersice {
     personalTrainerId: number
 }
 
-export const config = {
-    api: {
-        bodyParser: true,
-    },
-}
-
 // auth
 export const PUT = auth(async (req) => {
     if (req.auth) {

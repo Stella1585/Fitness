@@ -10,8 +10,6 @@ export async function createClientAction(e: FormData) {
     //@ts-ignore
     if (!session || !session.user?.jwt_external) return;
 
-
-    // const formData = new FormData(data);
     const firstName = e.get("firstName")?.toString();
     const lastName = e.get("lastName")?.toString();
     const email = e.get("email")?.toString();
@@ -29,8 +27,6 @@ export async function createClientAction(e: FormData) {
         accountType: "Client"
     }
 
-    console.log(newClient)
-
     //? Post request for create a client
 
     // const res = await fetch("https://afefitness2023.azurewebsites.net/api/Users", {
@@ -39,7 +35,7 @@ export async function createClientAction(e: FormData) {
     //         "Content-Type": "application/json",
     //         "Authorization": `Bearer ${session.user?.jwt_external}`
     //     },
-    //     body: JSON.stringify(formData),
+    //     body: JSON.stringify(newClient),
 
     // })
 
@@ -72,7 +68,7 @@ export async function createPersonalTrainerAction(e: FormData) {
     //         "Content-Type": "application/json",
     //         "Authorization": `Bearer ${jwt_external_token}`
     //     },
-    //     body: JSON.stringify(formData),
+    //     body: JSON.stringify(newPersonalTrainer),
 
     // })
 

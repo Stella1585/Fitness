@@ -6,7 +6,7 @@ export default function NotFound() {
           404 Page Not Found
         </h1>
         <p className="text-lg text-gray-600 mb-8">
-          The page you're looking for doesn't seem to exist. It may have been
+          The page you`&apos;`re looking for doesn`&apos;`t seem to exist. It may have been
           moved or deleted. If you think this is an error, please contact
           support.
         </p>

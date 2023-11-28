@@ -1,12 +1,13 @@
 import { auth } from "auth";
+import { Session } from "next-auth";
 import ManagerTabs from "@/components/manager/manager-tabs";
 
 export default async function ManagerPage() {
-  const session = await auth();
+  const session: Session | null = await auth();
 
   //@ts-ignore
-  if (!session && session?.user?.role !== "Manager")
-    return <p>You are not authorized to view this page!</p>;
+  // if ((!session || !session?.user) && session?.user?.role !== "Manager")
+  //   return <p>You are not authorized to view this page!</p>;
 
   return (
     <div>

@@ -2,9 +2,11 @@ import { auth } from "auth"
 
 export const GET = auth(async (req) => {
     if (req.auth) {
+        //@ts-ignore
         if (req.auth.user?.role !== "PersonalTrainer") return Response.json({ message: "Not authenticated" }, { status: 401 })
         //TODO: console.log() should be deleted in production
         let url = "https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/trainer";
+        //@ts-ignore
         let jwt_token = req?.auth?.user?.jwt_external;
 
 
@@ -36,5 +38,5 @@ export const GET = auth(async (req) => {
     }
 
     return Response.json({ message: "Not authenticated" }, { status: 401 })
-})
+}) as any;
 

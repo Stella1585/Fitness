@@ -1,11 +1,5 @@
 import { auth } from "auth"
 
-export const config = {
-  api: {
-    bodyParser: true,
-  },
-}
-
 // auth
 
 export const POST = auth(async (req) => {

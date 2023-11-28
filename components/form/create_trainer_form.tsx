@@ -12,19 +12,19 @@ import {
   ToggleSwitch,
 } from "flowbite-react";
 
-import { createClientAction } from "@/actions/form_actions";
-export default function CreateClientForm() {
+import { createPersonalTrainerAction } from "@/actions/form_actions";
+export default function CreateTrainerForm() {
   return (
     <form
       className="flex max-w-md flex-col gap-4"
-      action={createClientAction}
+      action={createPersonalTrainerAction}
       onSubmit={() => {
         console.log("hello");
       }}
     >
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="firstName" value="Client Firstname" />
+          <Label htmlFor="firstName" value="Trainer Firstname" />
         </div>
         <TextInput
           id="firstName"
@@ -36,7 +36,7 @@ export default function CreateClientForm() {
       </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="lastName" value="Client Lastname" />
+          <Label htmlFor="lastName" value="Trainer Lastname" />
         </div>
         <TextInput
           id="lastName"
@@ -48,7 +48,7 @@ export default function CreateClientForm() {
       </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="email" value="Client Email" />
+          <Label htmlFor="email" value="Trainer Email" />
         </div>
         <TextInput
           id="email"
@@ -60,7 +60,7 @@ export default function CreateClientForm() {
       </div>
       <div>
         <div className="mb-2 block">
-          <Label htmlFor="password" value="Client Password" />
+          <Label htmlFor="password" value="Trainer Password" />
         </div>
         <TextInput
           id="password"
@@ -70,7 +70,6 @@ export default function CreateClientForm() {
           required
         />
       </div>
-      <input name="personalTrainerId" defaultValue={10} hidden />
       <Button type="submit">Submit</Button>
     </form>
   );
