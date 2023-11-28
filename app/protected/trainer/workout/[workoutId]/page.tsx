@@ -2,9 +2,10 @@
 import { Table } from "flowbite-react";
 // import { auth } from "auth";
 import { useEffect, useState } from "react";
+import AddExerciseWorkoutProgramForm from "@/components/form/add_exercise_workout_program_form";
 
 export default function SpecificWorkout({ params }: any) {
-  const [workoutData, setWorkoutData]:any = useState([]);
+  const [workoutData, setWorkoutData]: any = useState([]);
   // const session = await auth();
   // console.log("ses: ", session);
 
@@ -29,7 +30,9 @@ export default function SpecificWorkout({ params }: any) {
 
   return (
     <div>
-      <h1 className="pb-5 font-bold text-6xl">Workout Exercises View</h1>
+      <h1 className="pb-5 font-bold text-6xl mt-6">Add Exercise</h1>
+      <AddExerciseWorkoutProgramForm />
+      <h1 className="pb-5 font-bold text-6xl mt-6">Workout Exercises View</h1>
       <div className="overflow-x-auto">
         <Table>
           <Table.Head>

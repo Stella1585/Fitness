@@ -1,4 +1,6 @@
-export interface ClientFormData{
+//* Form Data Types */
+
+export interface ClientFormData {
     firstName: string | undefined
     lastName: string | undefined
     email: string | undefined
@@ -7,10 +9,38 @@ export interface ClientFormData{
     accountType: string | undefined
 }
 
-export interface PersonalTrainerFormData{
+export interface PersonalTrainerFormData {
     firstName: string | undefined
     lastName: string | undefined
     email: string | undefined
     password: string | undefined
     accountType: string | undefined
 }
+
+//* End of Form Data Types */
+
+//* Common Types */
+
+
+export interface Exercise {
+    name: string
+    description: string
+    set?: number
+    repetitions?: number
+    time?: string
+}
+
+export interface WorkoutProgram {
+    WorkoutProgramId: number
+    name: string
+    description: string
+    exercises: Exercise[]
+    personalTrainerId: number
+    clientId: number
+}
+
+//* END OF COMMON TYPES
+
+
+
+
