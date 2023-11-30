@@ -54,7 +54,7 @@ export default async function TrainerWorkoutsView() {
               <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                 {workout?.name}
               </TableCell>
-              <TableCell>{workout?.name}</TableCell>
+              <TableCell>{workout?.description}</TableCell>
               <TableCell>{workout?.clientId}</TableCell>
 
               <TableCell>
