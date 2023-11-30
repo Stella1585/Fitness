@@ -1,22 +1,23 @@
-import { Tabs } from "flowbite-react";
-import ClientView from "./client-view";
+import { Tabs, TabItem } from "flowbite-react";
+import ClientView from "./lists-clients";
 import TrainerWorkoutsView from "./trainer-workouts-view";
 import CreateClientForm from "../form/create_client_form";
-export default function TrainerTabs({ clients, workouts }: any) {
+import CreateWorkoutProgramForm from "../form/create_workout_program_form";
+export default function TrainerTabs() {
   return (
     <Tabs aria-label="Pills" style="pills">
-      <Tabs.Item active title="Create Client">
+      <TabItem active title="Create Client">
         <CreateClientForm />
-      </Tabs.Item>
-      <Tabs.Item title="Modify Client">
-        <p className="text-sm text-gray-500 dark:text-gray-400">Content 2</p>
-      </Tabs.Item>
-      <Tabs.Item title="Workout Programs">
-        <TrainerWorkoutsView workouts={workouts}></TrainerWorkoutsView>
-      </Tabs.Item>
-      <Tabs.Item title="Client">
-        <ClientView clients={clients}></ClientView>
-      </Tabs.Item>
+      </TabItem>
+      <TabItem title="Create Workout Program Client">
+        <CreateWorkoutProgramForm />
+      </TabItem>
+      <TabItem title="Workout Programs">
+        <TrainerWorkoutsView/>
+      </TabItem>
+      <TabItem title="Client">
+        <ClientView />
+      </TabItem>
     </Tabs>
   );
 }

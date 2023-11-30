@@ -1,11 +1,38 @@
 import NextAuth from "next-auth"
-
 import CredentialsProvider from "next-auth/providers/credentials"
-import GitHub from "next-auth/providers/github"
-import jwt from "jsonwebtoken";
-
-
+// import jwt from "jsonwebtoken";
+import { decodeJwt, decodeProtectedHeader } from "jose"
 import type { NextAuthConfig } from "next-auth"
+
+function decodeToken(token: string) {
+  try {
+    //!Decodes a signed JSON Web Token payload. This does not validate the JWT Claims Set types or values. This does not validate the JWS Signature. 
+    //!For a proper Signed JWT Claims Set validation and JWS signature verification use jose.jwtVerify(). For an encrypted JWT Claims Set validation and JWE decryption use jose.jwtDecrypt()
+    //@ts-ignore
+    return decodeJwt(token);
+  } catch (error) {
+    console.error('Failed to decode JWT token', error);
+    return null;
+  }
+}
+
+//@ts-ignore
+async function getUserById(token: string) {
+  const decoded_token: any = decodeToken(token);
+  if (!decoded_token) {
+    throw new Error("");
+  }
+
+  let res = await fetch(`https://afefitness2023.azurewebsites.net/api/Users/${decoded_token.UserId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      // Include authentication token if required:
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  return res.json();
+}
 
 export const config = {
   theme: {
@@ -39,32 +66,10 @@ export const config = {
             headers: { "Content-Type": "application/json" }
           });
 
-          //@ts-ignore
-          async function getUserById(token: string) {
-            const decoded_token: any = jwt.decode(token);
-            if (!decoded_token) {
-              throw new Error("");
-            }
-
-            let res = await fetch(`https://afefitness2023.azurewebsites.net/api/Users/${decoded_token.UserId}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                // Include authentication token if required:
-                'Authorization': `Bearer ${token}`,
-              },
-            });
-            return res.json();
-          }
-
           const data = await res.json();
           if (res.ok && data.jwt) {
             let user_start = await getUserById(data.jwt);
-            // console.log(user_start);
-
-
             let user = { ...user_start, jwt_external: data.jwt, role: user_start?.accountType, id: user_start.userId };
-
             return user;
           }
         } catch (error) {
@@ -72,7 +77,6 @@ export const config = {
 
         }
         return null;
-
       }
     })
   ],
@@ -97,42 +101,24 @@ export const config = {
         if (pathname.startsWith("/protected/manager") && auth?.user?.role != "Manager") {
           const redirectUrl = new URL("/", nextUrl.origin)
           return Response.redirect(redirectUrl)
-
-
         }
         //@ts-ignore
         if (pathname.startsWith("/protected/trainer") && auth?.user?.role != "PersonalTrainer") {
           const redirectUrl = new URL("/", nextUrl.origin)
           return Response.redirect(redirectUrl)
-
         }
         //@ts-ignore
         if (pathname.startsWith("/protected/client") && auth?.user?.role != "Client") {
           const redirectUrl = new URL("/", nextUrl.origin)
           return Response.redirect(redirectUrl)
-
         }
       }
-
-      // if (pathname === "/protected/manager") return !!auth
-      // if (pathname === "/protected/client") return !!auth
-      // if (pathname === "/protected/trainer") return !!auth
-
       return true
     },
     async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      // if (url.startsWith("/")) return `${baseUrl}${url}`
-      // Allows callback URLs on the same origin
-      // else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     },
 
-    // async redirect({ url, baseUrl }) {
-    //   console.log(baseUrl);
-
-    //   return baseUrl
-    // },
     jwt({ token, user }) {
       if (user) {
         //@ts-ignore

@@ -1,53 +1,73 @@
-import { Table } from "flowbite-react";
+import { auth } from "auth";
+import Link from "next/link";
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+} from "flowbite-react";
 import { useRouter } from "next/navigation";
-export default function TrainerWorkoutsView({ workouts }: { workouts: any }) {
-  // console.log(workouts);
-  const router = useRouter();
+export default async function TrainerWorkoutsView() {
+  const session = await auth();
+  const url =
+    "https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/trainer";
+  //@ts-ignore
+  const jwt_external = session?.user?.jwt_external;
+  if (!jwt_external) return <div>Not authenticated</div>;
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt_external}`,
+    },
+    cache: "no-cache",
+    next: {
+      tags: ["workoutProgramsTrainer"],
+    },
+  });
+  const workouts = await res.json();
+  // const router = useRouter();
 
-  if (!workouts || workouts.length === 0)
+  if (!res.ok || !workouts || workouts.length === 0)
     return <div>No workouts found ...</div>;
 
   return (
     <div className="overflow-x-auto">
       <Table>
-        <Table.Head>
-          <Table.HeadCell>Name</Table.HeadCell>
-          <Table.HeadCell>Description</Table.HeadCell>
-          <Table.HeadCell>Client_Name</Table.HeadCell>
-          <Table.HeadCell></Table.HeadCell>
-          <Table.HeadCell>
+        <TableHead>
+          <TableHeadCell>Name</TableHeadCell>
+          <TableHeadCell>Description</TableHeadCell>
+          <TableHeadCell>Client_Name</TableHeadCell>
+          <TableHeadCell></TableHeadCell>
+          <TableHeadCell>
             <span className="sr-only">Edit</span>
-          </Table.HeadCell>
-        </Table.Head>
-        <Table.Body className="divide-y">
+          </TableHeadCell>
+        </TableHead>
+        <TableBody className="divide-y">
           {workouts.map((workout: any) => (
-            <Table.Row
+            <TableRow
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
               key={workout.workoutProgramId}
             >
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                 {workout?.name}
-              </Table.Cell>
-              <Table.Cell>{workout?.name}</Table.Cell>
-              <Table.Cell>{workout?.clientId}</Table.Cell>
-              <Table.Cell
-                onClick={() => {
-                  router.push(
-                    `/protected/trainer/workout/${workout.workoutProgramId}`
-                  );
-                  // console.log("test click");
-                }}
-              >
-                <a
-                  //href="#"
+              </TableCell>
+              <TableCell>{workout?.name}</TableCell>
+              <TableCell>{workout?.clientId}</TableCell>
+
+              <TableCell>
+                <Link
                   className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                  href={`/protected/trainer/workout/${workout.workoutProgramId}`}
                 >
                   View
-                </a>
-              </Table.Cell>
-            </Table.Row>
+                </Link>
+              </TableCell>
+            </TableRow>
           ))}
-        </Table.Body>
+        </TableBody>
       </Table>
     </div>
   );

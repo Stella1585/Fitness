@@ -1,6 +1,6 @@
 import { MainNav } from "./main-nav";
 import UserButton from "../lib/user-button";
-import ShortRoleInfo from "./navigation/short-role-info";
+import ShortRoleInfo from "./navigation_extras/short-role-info";
 
 export default function Header() {
   return (

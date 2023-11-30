@@ -1,12 +1,5 @@
-import { auth } from "auth";
-import { redirect } from "next/navigation";
-import TrainerStartView from "@/components/trainer/trainer-start-view";
+import TrainerTabs from "@/components/trainer/trainer-tabs";
 
 export default async function TrainerPage() {
-  // const session = await auth();
-
-  //@ts-ignore
-  // if (session?.user?.role != "PersonalTrainer") redirect("/");
-
-  return <TrainerStartView />;
+  return <TrainerTabs />;
 }

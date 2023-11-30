@@ -1,17 +1,20 @@
-"use client";
-import { Tabs } from "flowbite-react";
+import { Tabs, TabItem } from "flowbite-react";
 import CreateTrainerForm from "../form/create_trainer_form";
-export default function ManagerTabs({}: any) {
+import ListTrainers from "./list-trainers";
+export default async function ManagerTabs({}: any) {
   return (
     <Tabs aria-label="Pills" style="pills">
-      <Tabs.Item active title="Profile">
+      <TabItem active title="Profile">
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Profile Data (Seperate Component)
         </p>
-      </Tabs.Item>
-      <Tabs.Item title="Create Personal Trainer">
-        <CreateTrainerForm></CreateTrainerForm>
-      </Tabs.Item>
+      </TabItem>
+      <TabItem title="Create Personal Trainer">
+        <div className="flex content-center w-600">
+          <CreateTrainerForm></CreateTrainerForm>
+          <ListTrainers />
+        </div>
+      </TabItem>
     </Tabs>
   );
 }

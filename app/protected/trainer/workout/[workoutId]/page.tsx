@@ -1,64 +1,69 @@
-"use client";
-import { Table } from "flowbite-react";
-// import { auth } from "auth";
-import { useEffect, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+} from "flowbite-react";
+import { auth } from "auth";
 import AddExerciseWorkoutProgramForm from "@/components/form/add_exercise_workout_program_form";
 
-export default function SpecificWorkout({ params }: any) {
-  const [workoutData, setWorkoutData]: any = useState([]);
-  // const session = await auth();
-  // console.log("ses: ", session);
+export default async function SpecificWorkout({ params }: any) {
+  const session = await auth();
+  if (!params.workoutId || !isFinite(params.workoutId))
+    return <div>Not authenticated</div>;
+  const url = `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/${params.workoutId}`;
+  //@ts-ignore
+  const jwt_external = session?.user?.jwt_external;
+  if (!jwt_external) return <div>Not authenticated</div>;
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt_external}`,
+    },
+    cache: "no-cache",
+    next: {
+      tags: ["personalTrainerWorkouts"],
+    },
+  });
 
-  useEffect(() => {
-    (async () => {
-      //TODO: must be checked
-      if (params.workoutId || isFinite(params.workoutId)) {
-      }
-      const res = await fetch(
-        `/api/external/trainer/workout/single/get/${params.workoutId}`
-      );
+  const workoutData = await res.json();
 
-      if (!res.ok) return;
-
-      const json = await res.json();
-
-      console.log(json);
-
-      setWorkoutData(json);
-    })();
-  }, []);
-
+  if (!workoutData)
+    return <div>No workout program found with the id {params.workoutId}</div>;
   return (
     <div>
       <h1 className="pb-5 font-bold text-6xl mt-6">Add Exercise</h1>
-      <AddExerciseWorkoutProgramForm />
+      <AddExerciseWorkoutProgramForm workoutId={params.workoutId} />
       <h1 className="pb-5 font-bold text-6xl mt-6">Workout Exercises View</h1>
       <div className="overflow-x-auto">
         <Table>
-          <Table.Head>
-            <Table.HeadCell>Name</Table.HeadCell>
-            <Table.HeadCell>Description</Table.HeadCell>
-            <Table.HeadCell>Sets</Table.HeadCell>
-            <Table.HeadCell>Reps/time</Table.HeadCell>
-          </Table.Head>
-          <Table.Body className="divide-y">
+          <TableHead>
+            <TableHeadCell>Name</TableHeadCell>
+            <TableHeadCell>Description</TableHeadCell>
+            <TableHeadCell>Sets</TableHeadCell>
+            <TableHeadCell>Reps/time</TableHeadCell>
+          </TableHead>
+          <TableBody className="divide-y">
             {workoutData?.exercises?.map((exercise: any) => (
-              <Table.Row
+              <TableRow
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 key={exercise.exerciseId}
               >
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                   {exercise?.name}
-                </Table.Cell>
-                <Table.Cell>{exercise?.description}</Table.Cell>
-                <Table.Cell>{exercise?.sets}</Table.Cell>
-                <Table.Cell>
+                </TableCell>
+                <TableCell>{exercise?.description}</TableCell>
+                <TableCell>{exercise?.sets}</TableCell>
+                <TableCell>
                   {exercise?.repetitions}{" "}
                   {exercise?.time ? `/ ${exercise?.time}` : ""}{" "}
-                </Table.Cell>
-              </Table.Row>
+                </TableCell>
+              </TableRow>
             ))}
-          </Table.Body>
+          </TableBody>
         </Table>
       </div>
     </div>

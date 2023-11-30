@@ -12,15 +12,12 @@ import {
   ToggleSwitch,
 } from "flowbite-react";
 
-import { createClientAction } from "@/actions/form_actions"; //TODO: should be replaced
-export default function AddExerciseWorkoutProgramForm() {
+import { createExerciseAction } from "@/actions/form_actions";
+export default function AddExerciseWorkoutProgramForm({ workoutId }: any) {
   return (
     <form
       className="flex max-w-md flex-col gap-4"
-      action={createClientAction}
-      onSubmit={() => {
-        console.log("hello");
-      }}
+      action={createExerciseAction}
     >
       <div>
         <div className="mb-2 block">
@@ -82,7 +79,7 @@ export default function AddExerciseWorkoutProgramForm() {
           required
         />
       </div>
-      {/* <input name="personalTrainerId" defaultValue={10} hidden /> */}
+      <TextInput type="hidden" name="programId" defaultValue={workoutId} hidden />
       <Button type="submit">Submit</Button>
     </form>
   );

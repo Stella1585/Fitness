@@ -11,7 +11,7 @@ export default function TermsPage() {
       <section>
         <h2>Introduction</h2>
         <p>
-          This policy outlines the acceptable use of FitSphere (the `&quot;`App`&quot;`), a
+          This policy outlines the acceptable use of FitSphere (the &quot;App&quot;), a
           platform serving clients, fitness trainers, and managers within the
           fitness industry.
         </p>
@@ -33,7 +33,7 @@ export default function TermsPage() {
         <h2 className="text-xl font-bold">Data Protection</h2>
         <p>
           The App is committed to protecting user data in accordance with
-          applicable data protection laws. Users`&apos;` personal information will be
+          applicable data protection laws. Users&apos; personal information will be
           collected, used, and disclosed as outlined in our Privacy Policy.
         </p>
       </section>

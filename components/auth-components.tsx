@@ -1,37 +1,31 @@
-import { signIn, signOut } from "auth"
-import { Button } from "./ui/button"
-import { redirect } from "next/navigation"
+import { signIn, signOut } from "auth";
+import { Button } from "flowbite-react";
+import { redirect } from "next/navigation";
 
-export function SignIn({
-  provider,
-  ...props
-}: { provider?: string } & React.ComponentPropsWithRef<typeof Button>) {
+export function SignIn() {
   return (
     <form
       action={async () => {
-        "use server"
-        const url = await signIn(provider, { redirect: false })
-        // TODO: fix in next-auth
-        redirect(url.replace("signin", "api/auth/signin"))
+        "use server";
+        const url = await signIn("Credentials", { redirect: false });
+        redirect(url.replace("signin", "api/auth/signin"));
       }}
     >
-      <Button {...props}>Sign In</Button>
+      <Button type="submit">Sign In</Button>
     </form>
-  )
+  );
 }
 
-export function SignOut(props: React.ComponentPropsWithRef<typeof Button>) {
+export function SignOut() {
   return (
     <form
       action={async () => {
-        "use server"
-        await signOut()
+        "use server";
+        await signOut();
       }}
       className="w-full"
     >
-      <Button variant="ghost" className="w-full p-0" {...props}>
-        Sign Out
-      </Button>
+      <Button type="submit">Sign Out</Button>
     </form>
-  )
+  );
 }

@@ -1,15 +1,8 @@
-"use client";
+// "use client";
 import {
   Button,
-  Checkbox,
-  FileInput,
   Label,
-  Radio,
-  RangeSlider,
-  Select,
-  Textarea,
   TextInput,
-  ToggleSwitch,
 } from "flowbite-react";
 
 import { createPersonalTrainerAction } from "@/actions/form_actions";
@@ -18,9 +11,7 @@ export default function CreateTrainerForm() {
     <form
       className="flex max-w-md flex-col gap-4"
       action={createPersonalTrainerAction}
-      onSubmit={() => {
-        console.log("hello");
-      }}
+      // onSubmit={() => {}}
     >
       <div>
         <div className="mb-2 block">

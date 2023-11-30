@@ -1,27 +1,9 @@
-"use client";
-import {
-  Button,
-  Checkbox,
-  FileInput,
-  Label,
-  Radio,
-  RangeSlider,
-  Select,
-  Textarea,
-  TextInput,
-  ToggleSwitch,
-} from "flowbite-react";
+import { Button, Label, TextInput } from "flowbite-react";
 
 import { createClientAction } from "@/actions/form_actions";
 export default function CreateClientForm() {
   return (
-    <form
-      className="flex max-w-md flex-col gap-4"
-      action={createClientAction}
-      onSubmit={() => {
-        console.log("hello");
-      }}
-    >
+    <form className="flex max-w-md flex-col gap-4" action={createClientAction}>
       <div>
         <div className="mb-2 block">
           <Label htmlFor="firstName" value="Client Firstname" />
@@ -70,7 +52,9 @@ export default function CreateClientForm() {
           required
         />
       </div>
-      <input name="personalTrainerId" defaultValue={10} hidden />
+      {/* <div>
+        <TextInput name="personalTrainerId" disabled defaultValue={10} hidden />
+      </div> */}
       <Button type="submit">Submit</Button>
     </form>
   );
