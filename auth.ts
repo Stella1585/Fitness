@@ -1,14 +1,13 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-// import jwt from "jsonwebtoken";
-import { decodeJwt, decodeProtectedHeader } from "jose"
+import { decodeJwt } from "jose"
 import type { NextAuthConfig } from "next-auth"
 
 function decodeToken(token: string) {
   try {
     //!Decodes a signed JSON Web Token payload. This does not validate the JWT Claims Set types or values. This does not validate the JWS Signature. 
     //!For a proper Signed JWT Claims Set validation and JWS signature verification use jose.jwtVerify(). For an encrypted JWT Claims Set validation and JWE decryption use jose.jwtDecrypt()
-    //@ts-ignore
+    //@ts-ignore 
     return decodeJwt(token);
   } catch (error) {
     console.error('Failed to decode JWT token', error);
@@ -16,7 +15,6 @@ function decodeToken(token: string) {
   }
 }
 
-//@ts-ignore
 async function getUserById(token: string) {
   const decoded_token: any = decodeToken(token);
   if (!decoded_token) {
