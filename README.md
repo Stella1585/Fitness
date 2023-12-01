@@ -30,13 +30,6 @@ This is a starter template for [Learn Next.js](https://nextjs.org/learn).
     Password = "asdfQWER",
 
 ### Personal trainers
-    
-    Email = "m@fit",
-    FirstName = "Superman",
-    LastName = "Mars",
-    AccountType = PersonalTrainer,
-    Password "aQ",
-
     Email = "w@fit",
     FirstName = "Superwoman",
     LastName = "Venus",
