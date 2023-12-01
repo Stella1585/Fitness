@@ -1,3 +1,4 @@
+"use client";
 import { Button, Label, TextInput } from "flowbite-react";
 
 import { createClientAction } from "@/actions/form_actions";

@@ -1,9 +1,10 @@
 import { ListGroup } from "flowbite-react";
 import { auth } from "auth";
+import { Session } from "next-auth";
 
 export default async function ListClients() {
   let url = "https://afefitness2023.azurewebsites.net/api/Users/Clients";
-  const session = await auth();
+  const session: Session | null = await auth();
   //@ts-ignore
   const jwt_external = session?.user?.jwt_external;
   if (!jwt_external) return <p>You are not authorized to view this page!</p>;

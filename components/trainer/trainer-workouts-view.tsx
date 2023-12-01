@@ -1,4 +1,5 @@
 import { auth } from "auth";
+import { Session } from "next-auth";
 import Link from "next/link";
 import {
   Table,
@@ -8,9 +9,8 @@ import {
   TableHead,
   TableHeadCell,
 } from "flowbite-react";
-import { useRouter } from "next/navigation";
 export default async function TrainerWorkoutsView() {
-  const session = await auth();
+  const session: Session | null = await auth();
   const url =
     "https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/trainer";
   //@ts-ignore

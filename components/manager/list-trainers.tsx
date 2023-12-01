@@ -1,7 +1,8 @@
 import { auth } from "auth";
+import { Session } from "next-auth";
 
 export default async function ListTrainers() {
-  const session = await auth();
+  const session: Session | null = await auth();
   //@ts-ignore
   const jwt_external = session?.user?.jwt_external;
   if (!jwt_external) return <div>Not authenticated</div>;

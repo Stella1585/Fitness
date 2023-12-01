@@ -38,6 +38,8 @@ yarn-error.txt
 #npm
 package-lock.json
 
+#pnpm
+pnpm-lock.yaml
 
 # Contentlayer
 .contentlayer

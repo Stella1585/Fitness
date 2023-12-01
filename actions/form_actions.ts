@@ -1,6 +1,6 @@
 "use server"
 import { ClientFormData, PersonalTrainerFormData } from "@/typings";
-
+import { Session } from "next-auth";
 import { auth } from "auth";
 import { revalidateTag } from "next/cache";
 import { StringifyOptions } from "querystring";
@@ -8,7 +8,7 @@ import { StringifyOptions } from "querystring";
 //* Create User
 
 export async function createClientAction(e: FormData) {
-    const session = await auth();
+    const session: Session | null = await auth();
 
     //@ts-ignore
     if (!session || !session.user?.jwt_external) return;
@@ -17,6 +17,7 @@ export async function createClientAction(e: FormData) {
     const lastName = e.get("lastName")?.toString();
     const email = e.get("email")?.toString();
     const password = e.get("password")?.toString();
+    //@ts-ignore
     const personalTrainerId = session.user?.id;
 
     if (!firstName || !lastName || !email || !password || !personalTrainerId) return;
@@ -51,7 +52,7 @@ export async function createClientAction(e: FormData) {
 }
 
 export async function createPersonalTrainerAction(e: FormData) {
-    const session = await auth();
+    const session: Session | null = await auth();
     //@ts-ignore
     if (!session || !session.user?.jwt_external) return;
     const firstName = e.get("firstName")?.toString();
@@ -91,11 +92,12 @@ export async function createPersonalTrainerAction(e: FormData) {
 //* Create Workout Program
 
 export async function createWorkoutProgramAction(e: FormData) {
-    const session = await auth();
+    const session: Session | null = await auth();
     //@ts-ignore
     if (!session || !session.user?.jwt_external) return;
     const name = e.get("name")?.toString();
     const description = e.get("description")?.toString();
+    //@ts-ignore
     const trainerId = session.user?.id;
     const clientId = e.get("clientId")?.toString();
 
@@ -127,7 +129,7 @@ export async function createWorkoutProgramAction(e: FormData) {
 //* Create Exercise
 
 export async function createExerciseAction(e: FormData) {
-    const session = await auth();
+    const session: Session | null = await auth();
     //@ts-ignore
     if (!session || !session.user?.jwt_external) return;
     const name = e.get("name")?.toString();
@@ -135,6 +137,7 @@ export async function createExerciseAction(e: FormData) {
     const sets: any = e.get("sets")?.toString();
     const reps = e.get("reps")?.toString();
     const time = e.get("time")?.toString();
+    //@ts-ignore
     const trainerId = session.user?.id;
     const workoutProgramId: any = e.get("programId")?.toString();
 
