@@ -9,7 +9,7 @@ const HomePage: NextPage = () => {
         <section className="mb-8">
           <h1 className="text-4xl font-bold text-teal-600 mb-4">Welcome to Fitness Scale</h1>
           <p className="text-lg text-gray-600">
-            Elevate your fitness journey with Fitness Scale – your personalized platform for achieving health and wellness goals. Whether you're a manager, personal trainer, or client, our app offers tailored features to meet your specific needs.
+            Elevate your fitness journey with Fitness Scale – your personalized platform for achieving health and wellness goals. Whether you are a manager, personal trainer, or client, our app offers tailored features to meet your specific needs.
           </p>
         </section>
 
