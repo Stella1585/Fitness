@@ -1,5 +1,6 @@
-"use client";
 import Link from "next/link";
+import { auth } from "auth";
+import {Session} from "next-auth";
 import {
   Button,
   Navbar,
@@ -9,20 +10,42 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 
-export function MainNav() {
+export async function MainNav() {
+  const session: Session | null = await auth();
+  let userRole: string | undefined;
+  if (session) {
+    //@ts-ignore
+    userRole = session?.user?.role;
+  }
   return (
     <Navbar fluid rounded>
-      {/* <div className="flex md:order-2">
-        <Button>Get started</Button>
-        <NavbarToggle />
-      </div> */}
       <NavbarCollapse>
         <NavbarLink href="/" active>
-          Home
+          <span className="text-lg" style={{ whiteSpace: "nowrap" }}>
+            Home
+          </span>
         </NavbarLink>
-        <NavbarLink href="/protected/manager">ManagerView</NavbarLink>
-        <NavbarLink href="/protected/client">ClientView</NavbarLink>
-        <NavbarLink href="/protected/trainer">TrainerView</NavbarLink>
+        {userRole === "Manager" && (
+          <NavbarLink href="/protected/manager">
+            <span className="text-lg" style={{ whiteSpace: "nowrap" }}>
+              Manage Trainers
+            </span>
+          </NavbarLink>
+        )}
+        {userRole === "Client" && (
+          <NavbarLink href="/protected/client">
+            <span className="text-lg" style={{ whiteSpace: "nowrap" }}>
+              View Workout Programs
+            </span>
+          </NavbarLink>
+        )}
+        {userRole === "PersonalTrainer" && (
+          <NavbarLink href="/protected/trainer">
+            <span className="text-lg" style={{ whiteSpace: "nowrap" }}>
+              Manage Client
+            </span>
+          </NavbarLink>
+        )}
       </NavbarCollapse>
     </Navbar>
   );
