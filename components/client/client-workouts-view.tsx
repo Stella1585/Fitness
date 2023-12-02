@@ -4,9 +4,14 @@ export default async function ClientWorkoutsView() {
   const session: Session | null = await auth();
   if (!session) return <div>Not authenticated!</div>;
   //@ts-ignore
-  const jwt = session.user?.jwt_external;
+  const jwt = session?.user?.jwt_external;
+  const userId = session?.user?.id;
+  console.log(jwt);
+
+  if (!jwt || !userId) return <div>Not authenticated</div>;
+
   const res = await fetch(
-    "https://afefitness2023.azurewebsites.net/api/WorkoutPrograms",
+    `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/client/${userId}`,
     {
       method: "GET",
       headers: {
@@ -20,9 +25,7 @@ export default async function ClientWorkoutsView() {
     }
   );
   const workouts = await res.json();
-
   if (!workouts) return <div>Loading ...</div>;
-
 
   return (
     <div>
