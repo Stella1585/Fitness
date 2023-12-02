@@ -7,10 +7,11 @@ import {
   TableHeadCell,
 } from "flowbite-react";
 import { auth } from "auth";
+import { Session } from "next-auth";
 import AddExerciseWorkoutProgramForm from "@/components/form/add_exercise_workout_program_form";
 
 export default async function SpecificWorkout({ params }: any) {
-  const session = await auth();
+  const session: Session | null = await auth();
   if (!params.workoutId || !isFinite(params.workoutId))
     return <div>Not authenticated</div>;
   const url = `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/${params.workoutId}`;
@@ -25,7 +26,7 @@ export default async function SpecificWorkout({ params }: any) {
     },
     cache: "no-cache",
     next: {
-      tags: ["personalTrainerWorkouts"],
+      tags: ["workoutProgramsTrainer"],
     },
   });
 

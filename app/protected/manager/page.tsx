@@ -1,5 +1,3 @@
-import { auth } from "auth";
-import { Session } from "next-auth";
 import ManagerTabs from "@/components/manager/manager-tabs";
 
 export default async function ManagerPage() {

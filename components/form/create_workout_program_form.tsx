@@ -6,11 +6,12 @@ import {
   TextInput,
   ToggleSwitch,
 } from "flowbite-react";
+import { Session } from "next-auth";
 import { auth } from "auth";
 
 import { createWorkoutProgramAction } from "@/actions/form_actions";
 export default async function CreateWorkoutProgramForm() {
-  const session = await auth();
+  const session: Session | null = await auth();
   let url = "https://afefitness2023.azurewebsites.net/api/Users/Clients";
   //@ts-ignore
   const jwt_external = session?.user?.jwt_external;

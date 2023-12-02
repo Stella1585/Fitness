@@ -1,5 +1,5 @@
 import { auth } from "auth";
-import { Session } from "next-auth";
+import {Session} from "next-auth";
 export default async function ShortRoleInfo() {
   const session: Session | null = await auth();
   if (session) {
