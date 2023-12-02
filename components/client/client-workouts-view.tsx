@@ -9,6 +9,7 @@ import {
   TableHeadCell,
 } from "flowbite-react";
 import { Session } from "next-auth";
+import ClientWorkoutSpecific from "./client-exercises-view-singular";
 export default async function ClientWorkoutsView() {
   const session: Session | null = await auth();
   if (!session) return <div>Not authenticated!</div>;
@@ -29,7 +30,7 @@ export default async function ClientWorkoutsView() {
       },
       cache: "no-cache",
       next: {
-        tags: ["workoutProgramsTrainer"],
+        tags: ["workoutProgramsClient"],
       },
     }
   );
@@ -41,6 +42,7 @@ export default async function ClientWorkoutsView() {
   // return multiple workouts
   if (workouts.length > 1)
   return (
+
     <Table>
     <TableHead>
       <TableHeadCell>Program Name</TableHeadCell>
@@ -60,7 +62,7 @@ export default async function ClientWorkoutsView() {
           <TableCell>
             <Link
               className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-              href={`/protected/client/workout/${workout.workoutProgramId}`}
+              href={`/protected/client/workout/${workout.workoutID}`}
             >
               View
             </Link>
@@ -76,29 +78,6 @@ export default async function ClientWorkoutsView() {
   // RETURN single workout if there aren't multiple workouts
 
   return (
-
-    <div className="overflow-x-auto">
-        <Table>
-            <TableHead>
-                <TableHeadCell>Exercise</TableHeadCell>
-                <TableHeadCell>Description</TableHeadCell>
-                <TableHeadCell>Sets</TableHeadCell>
-                <TableHeadCell>Repetitions/Time</TableHeadCell>            </TableHead>
-        </Table>
-        <TableBody className="divide-y">
-            {workouts.exercises.map((exercise:any) => (
-                <TableRow
-                    className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                    key={exercise.exerciseId}
-                    >
-                    <TableCell>{exercise?.name}</TableCell>
-                    <TableCell>{exercise?.description}</TableCell>
-                </TableRow>
-            ))
-            }
-
-        </TableBody>
-
-    </div>
+    <ClientWorkoutSpecific params={{ workoutId: workouts[0] }} />
   );
 }
