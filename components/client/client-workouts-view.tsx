@@ -1,5 +1,15 @@
 import { auth } from "auth";
+import Link from "next/link";
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+} from "flowbite-react";
 import { Session } from "next-auth";
+import ClientWorkoutSpecific from "./client-exercises-view-singular";
 export default async function ClientWorkoutsView() {
   const session: Session | null = await auth();
   if (!session) return <div>Not authenticated!</div>;
@@ -20,20 +30,54 @@ export default async function ClientWorkoutsView() {
       },
       cache: "no-cache",
       next: {
-        tags: ["workoutProgramsTrainer"],
+        tags: ["workoutProgramsClient"],
       },
     }
   );
   const workouts = await res.json();
+
   if (!workouts) return <div>Loading ...</div>;
 
+
+  // return multiple workouts
+  if (workouts.length > 1)
   return (
-    <div>
+
+    <Table>
+    <TableHead>
+      <TableHeadCell>Program Name</TableHeadCell>
+      <TableHeadCell>Description</TableHeadCell>
+      <TableHeadCell></TableHeadCell>
+    </TableHead>
+    <TableBody className="divide-y">
       {workouts.map((workout: any) => (
-        <div key={workout?.workoutProgramId}>
-          <div>{workout?.name}</div>
-        </div>
+        <TableRow
+          className="bg-white dark:border-gray-700 dark:bg-gray-800"
+          key={workout.workoutProgramId}
+        >
+          <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+            {workout?.name}
+          </TableCell>
+          <TableCell>{workout?.description}</TableCell>
+          <TableCell>
+            <Link
+              className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+              href={`/protected/client/workout/${workout.workoutID}`}
+            >
+              View
+            </Link>
+          </TableCell>
+        </TableRow>
       ))}
-    </div>
+    </TableBody>
+  </Table> 
+
+  )
+
+
+  // RETURN single workout if there aren't multiple workouts
+
+  return (
+    <ClientWorkoutSpecific params={{ workoutId: workouts[0] }} />
   );
 }
