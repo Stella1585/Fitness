@@ -14,10 +14,12 @@ export default async function SpecificWorkout({ params }: any) {
   const session: Session | null = await auth();
   if (!params.workoutId || !isFinite(params.workoutId))
     return <div>Not authenticated</div>;
+
   const url = `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/${params.workoutId}`;
   //@ts-ignore
   const jwt_external = session?.user?.jwt_external;
   if (!jwt_external) return <div>Not authenticated</div>;
+
   const res = await fetch(url, {
     method: "GET",
     headers: {
@@ -25,15 +27,11 @@ export default async function SpecificWorkout({ params }: any) {
       Authorization: `Bearer ${jwt_external}`,
     },
     cache: "no-cache",
-
   });
 
   const workoutData = await res.json();
 
   if (!workoutData)
-    return <div>No workout program found with the id {params.workoutId}</div>;
-  return (
-    <ClientWorkoutSpecific/>
-  );
+    return <div>No workout program found with the id {params?.workoutId}</div>;
+  return <ClientWorkoutSpecific workoutId={params?.workoutId} />;
 }
-
