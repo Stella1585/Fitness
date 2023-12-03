@@ -28,7 +28,6 @@ export default async function TrainerWorkoutsView() {
     },
   });
   const workouts = await res.json();
-  // const router = useRouter();
 
   if (!res.ok || !workouts || workouts.length === 0)
     return <div>No workouts found ...</div>;
