@@ -33,7 +33,7 @@ import {
       return <div>No workout program found with the id {workoutId}</div>;
     return (
       <div>
-        <h1 className="pb-5 font-bold text-6xl mt-6">Workout Exercises View</h1>
+        <h2 className="text-2xl font-bold mb-2 text-teal-600">{workoutData?.name}</h2>
         <div className="overflow-x-auto">
           <Table>
             <TableHead>

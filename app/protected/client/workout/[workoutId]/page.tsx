@@ -12,12 +12,12 @@ import ClientWorkoutSpecific from "@/components/client/client-exercises-view-sin
 
 export default async function SpecificWorkout({ params }: any) {
   const session: Session | null = await auth();
-  if (!params.workoutId || !isFinite(params.workoutId))
-    return <div>Not authenticated</div>;
+  if (!params.workoutID || !isFinite(params.workoutID))
+    return <div>Not authenticated - workoutID not found</div>;
   const url = `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/${params.workoutId}`;
   //@ts-ignore
   const jwt_external = session?.user?.jwt_external;
-  if (!jwt_external) return <div>Not authenticated</div>;
+  if (!jwt_external) return <div>Not authenticated - user not found</div>;
   const res = await fetch(url, {
     method: "GET",
     headers: {
@@ -33,7 +33,7 @@ export default async function SpecificWorkout({ params }: any) {
   if (!workoutData)
     return <div>No workout program found with the id {params.workoutId}</div>;
   return (
-    <ClientWorkoutSpecific/>
+    <ClientWorkoutSpecific workoutID = {params.workoutId}/>
   );
 }
 
