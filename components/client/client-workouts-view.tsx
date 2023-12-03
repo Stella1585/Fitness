@@ -18,9 +18,7 @@ export default async function ClientWorkoutsView() {
   const userId = session?.user?.id;
   console.log(jwt);
   console.log(userId);
-
   console.log((!jwt || !userId));
-  
   
 
   // if (!jwt || !userId) return <div>Not authenticated</div>;
@@ -46,8 +44,8 @@ export default async function ClientWorkoutsView() {
     console.log(workouts);
     
 
+  if (workouts.length === 0) return <p>No workout programs</p>
 
-  // return multiple workouts
   if (workouts.length > 1)
   return (
 
@@ -70,7 +68,7 @@ export default async function ClientWorkoutsView() {
           <TableCell>
             <Link
               className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-              href={`/protected/client/workout/${workout.workoutID}`}
+              href={{pathname: `/protected/client/workout/${workout.workoutProgramId}`} }
             >
               View
             </Link>
@@ -81,11 +79,6 @@ export default async function ClientWorkoutsView() {
   </Table> 
 
   )
-
-  if (workouts.length === 0) return <p>No workout programs</p>
-
-
-  // RETURN single workout if there aren't multiple workouts
 
   return (
     <ClientWorkoutSpecific workoutId={workouts[0]?.workoutProgramId} />

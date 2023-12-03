@@ -8,7 +8,6 @@ import {
   } from "flowbite-react";
   import { auth } from "auth";
   import { Session } from "next-auth";
-  // import { useRouter } from "next/router";
   
   export default async function ClientWorkoutSpecific({ workoutId }: any) {
     const session: Session | null = await auth();
