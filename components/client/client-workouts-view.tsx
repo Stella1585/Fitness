@@ -17,8 +17,13 @@ export default async function ClientWorkoutsView() {
   const jwt = session?.user?.jwt_external;
   const userId = session?.user?.id;
   console.log(jwt);
+  console.log(userId);
 
-  if (!jwt || !userId) return <div>Not authenticated</div>;
+  console.log((!jwt || !userId));
+  
+  
+
+  // if (!jwt || !userId) return <div>Not authenticated</div>;
 
   const res = await fetch(
     `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/client/${userId}`,
@@ -37,6 +42,9 @@ export default async function ClientWorkoutsView() {
   const workouts = await res.json();
 
   if (!workouts) return <div>Loading ...</div>;
+
+    console.log(workouts);
+    
 
 
   // return multiple workouts
@@ -74,10 +82,12 @@ export default async function ClientWorkoutsView() {
 
   )
 
+  if (workouts.length === 0) return <p>No workout programs</p>
+
 
   // RETURN single workout if there aren't multiple workouts
 
   return (
-    <ClientWorkoutSpecific params={{ workoutId: workouts[0] }} />
+    <ClientWorkoutSpecific workoutId={workouts[0]?.workoutProgramId} />
   );
 }

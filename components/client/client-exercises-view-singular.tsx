@@ -8,13 +8,13 @@ import {
   } from "flowbite-react";
   import { auth } from "auth";
   import { Session } from "next-auth";
-  import { useRouter } from "next/router";
+  // import { useRouter } from "next/router";
   
-  export default async function ClientWorkoutSpecific({ params }: any) {
+  export default async function ClientWorkoutSpecific({ workoutId }: any) {
     const session: Session | null = await auth();
-    if (!params.workoutId || !isFinite(params.workoutId))
+    if (!workoutId || !isFinite(workoutId))
       return <div>Not authenticated</div>;
-    const url = `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/${params.workoutId}`;
+    const url = `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/${workoutId}`;
     //@ts-ignore
     const jwt = session?.user?.jwt_external;
     if (!jwt) return <div>Not authenticated</div>;
@@ -25,13 +25,12 @@ import {
         Authorization: `Bearer ${jwt}`,
       },
       cache: "no-cache",
-  
     });
   
     const workoutData = await res.json();
   
     if (!workoutData)
-      return <div>No workout program found with the id {params.workoutId}</div>;
+      return <div>No workout program found with the id {workoutId}</div>;
     return (
       <div>
         <h1 className="pb-5 font-bold text-6xl mt-6">Workout Exercises View</h1>
