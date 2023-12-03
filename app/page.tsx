@@ -29,7 +29,6 @@ const HomePage: NextPage = () => {
           <p className="text-gray-600">
             Ready to achieve your fitness goals? Sign up or log in now to experience the full potential of Fitness Scale.
           </p>
-          {/* Add your sign-up and login buttons or links here */}
         </section>
       </div>
     </div>

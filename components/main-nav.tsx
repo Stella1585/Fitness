@@ -42,7 +42,7 @@ export async function MainNav() {
         {userRole === "PersonalTrainer" && (
           <NavbarLink href="/protected/trainer">
             <span className="text-lg" style={{ whiteSpace: "nowrap" }}>
-              Manage Client
+              Manage Clients
             </span>
           </NavbarLink>
         )}

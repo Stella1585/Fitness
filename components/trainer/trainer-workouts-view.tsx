@@ -39,7 +39,7 @@ export default async function TrainerWorkoutsView() {
         <TableHead>
           <TableHeadCell>Name</TableHeadCell>
           <TableHeadCell>Description</TableHeadCell>
-          <TableHeadCell>Client_Name</TableHeadCell>
+          <TableHeadCell>Client_ID</TableHeadCell>
           <TableHeadCell></TableHeadCell>
           <TableHeadCell>
             <span className="sr-only">Edit</span>
