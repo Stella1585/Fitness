@@ -40,8 +40,8 @@ export default async function ClientWorkoutsView() {
     console.log(workouts);
     
 
+  if (workouts.length === 0) return <p>No workout programs</p>
 
-  // return multiple workouts
   if (workouts.length > 1)
   return (
 
@@ -75,11 +75,6 @@ export default async function ClientWorkoutsView() {
   </Table> 
 
   )
-
-  if (workouts.length === 0) return <p>No workout programs</p>
-
-
-  // RETURN single workout if there aren't multiple workouts
 
   return (
     <ClientWorkoutSpecific workoutId={workouts[0]?.workoutProgramId} />
