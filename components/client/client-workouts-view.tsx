@@ -16,14 +16,8 @@ export default async function ClientWorkoutsView() {
   //@ts-ignore
   const jwt = session?.user?.jwt_external;
   const userId = session?.user?.id;
-  console.log(jwt);
-  console.log(userId);
-
-  console.log((!jwt || !userId));
   
-  
-
-  // if (!jwt || !userId) return <div>Not authenticated</div>;
+  if (!jwt || !userId) return <div>Not authenticated</div>;
 
   const res = await fetch(
     `https://afefitness2023.azurewebsites.net/api/WorkoutPrograms/client/${userId}`,
@@ -70,7 +64,7 @@ export default async function ClientWorkoutsView() {
           <TableCell>
             <Link
               className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-              href={`/protected/client/workout/${workout.workoutID}`}
+              href={`/protected/client/workout/${workout?.workoutProgramId}`}
             >
               View
             </Link>
