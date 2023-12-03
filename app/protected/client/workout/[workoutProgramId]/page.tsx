@@ -25,7 +25,6 @@ export default async function SpecificWorkout({ params }: any) {
       Authorization: `Bearer ${jwt_external}`,
     },
     cache: "no-cache",
-
   });
 
   const workoutData = await res.json();
@@ -36,4 +35,3 @@ export default async function SpecificWorkout({ params }: any) {
     <ClientWorkoutSpecific workoutId={workoutData.workoutProgramId}/>
   );
 }
-

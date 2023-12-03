@@ -1,4 +1,11 @@
-import { ListGroup } from "flowbite-react";
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+} from "flowbite-react";
 import { auth } from "auth";
 import { Session } from "next-auth";
 
@@ -23,14 +30,28 @@ export default async function ListClients() {
   const clients = await res.json();
 
   return (
-    <div className="flex justify-center">
-      <ListGroup className="w-48">
-        {clients.map((client: any) => (
-          <ListGroup.Item key={client.userId}>
-            {client?.firstName} {client?.lastName}
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+    <div className="overflow-x-auto">
+      <Table>
+        <TableHead>
+          <TableHeadCell>Name</TableHeadCell>
+          <TableHeadCell>Id</TableHeadCell>
+        </TableHead>
+        <TableBody className="divide-y">
+          {clients.map((client: any) => (
+            <TableRow
+              className="bg-white dark:border-gray-700 dark:bg-gray-800"
+              key={client.userId}
+            >
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                {client?.firstName} {client?.lastName}
+              </TableCell>
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                {client?.userId}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 }

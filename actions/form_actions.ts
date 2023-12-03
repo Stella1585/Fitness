@@ -125,6 +125,7 @@ export async function createWorkoutProgramAction(e: FormData) {
     console.log(await res.json());
 
     revalidateTag("workoutProgramsTrainer")
+    revalidateTag("workoutProgramsClient")
 }
 //* Create Exercise
 
